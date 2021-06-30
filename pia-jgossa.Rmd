@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
 knitr::opts_chunk$set(pdf.options(encoding = "CP1250"))
 options(dplyr.summarise.inform = FALSE)
 
-knitr::opts_chunk$set(fig.width = 8, fig.height = 4.5)
+knitr::opts_chunk$set(fig.width = 8, fig.height = 3.5)
 
 library(ggcpesrthemes)
 theme_cpesr_setup(authors = "Julien Gossa, Camille Nous", camille=FALSE, source = "data.enseignementsup-recherche.gouv.fr", base_family = "" )
@@ -40,12 +40,9 @@ etab.filter <- c("Centre Universitaire de Mayotte",
 
 # Intérêt et originalité du sujet.
 
-D'après le site du Ministère, « _le Programme d’investissements d’avenir (PIA), 
-piloté par le Secrétariat général pour l'investissement (SGPI), a été mis en 
-place par l’État pour financer des investissements innovants et prometteurs 
-sur le territoire, afin de permettre à la France d’augmenter son potentiel de 
-croissance et d’emplois_ ». Dans l'enseignement supérieur et la recherche (ESR), 
-l'opérateur du PIA est l'Agence Nationale de la Recherche (ANR), qui a été chargée
+Dans l'enseignement supérieur et la recherche (ESR), 
+l'opérateur du Programme d’investissements d’avenir (PIA) est l'Agence Nationale 
+de la Recherche (ANR), qui a été chargée
 de la répartition de 22,5 Md€ sur les 35 du PIA 1 (2010), 4,5 Md€ sur les 12 du 
 PIA 2 (2014) et 2,85 Md€ sur les 10 du PIA 3 (2017). Un PIA 4 est en cours de 
 programmation pour 20 Md€.
@@ -59,26 +56,27 @@ ressources budgétaires peut-être additionnelles.
 
 Le jeu de données ouvertes `Indicateurs financiers des opérateurs de l’enseignement supérieur français`
 ^[https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-operateurs-indicateurs-financiers/information/] 
-décrit différentes informations budgétaires à propos des établissements de l'ESR
-dans le périmètre du MESRI, dont la variable `ANR PIA` qui indique le montant de 
+décrit différentes informations budgétaires à propos des établissements de l'ESR, 
+dont la variable `ANR PIA` qui indique le montant de 
 PIA reçu par chaque établissement par exercice budgétaire.
 
-La Figure 1 présente la somme de ces montants pour quatre catégories d'établissement :
-universités IDEx, universités ISITE, université ni IDEx ni ISITE (NINI), et non
-université. On constate ainsi que ces moyens atteignent presque 600M€ en 2021, dont
-la majeure partie est récupérée par les universités labellisées IDEX.
 
-
-```{r total.pia, fig.cap = "Répartition des montants du PIA distribués par l'ANR aux établissements de l'ESR"}
+```{r total.pia, fig.cap = "Répartition des montants du PIA distribués par l'ANR aux établissements de l'ESR", fig.height=3.5}
 anr %>%
   group_by(exercice,étiquettes) %>%
   summarise(ANR.PIA = sum(ANR.PIA, na.rm = TRUE) / 1e6) %>%
   ggplot(aes(x=exercice,y=ANR.PIA,fill=étiquettes)) +
   geom_col() +
   xlab("exercice budgétaire") + ylab("ANR PIA (M€)") +
-  scale_fill_manual(values=étiquettes.pal) +
+  scale_fill_manual(values=étiquettes.pal, name="Labellisation") +
   theme_cpesr_cap()
 ```
+
+La Figure 1 présente la somme de ces montants pour quatre catégories d'établissement :
+universités IDEx, universités ISITE, université ni IDEx ni ISITE (NINI), et non
+université. On constate ainsi que ces moyens atteignent presque 600M€ en 2021, dont
+la majeure partie est récupérée par les universités labellisées IDEX.
+
 
 L'originalité de cette proposition est d'utiliser la science des données pour 
 proposer un éclairage quantitativiste sur la répartition des moyens du PIA aux 
@@ -104,7 +102,8 @@ le « _déclin_ ».
 Cependant, Alain Juppé estime que le PIA est une réussite car « _Nous avons su 
 éviter le saupoudrage. [...] Nous avons diversifié les produits, si j’ose dire, 
 avec les idex et les isite_ » [@julien_jankowiak_alain_2021]. Il confirme ainsi
-que ce programme relève du gouvernement à distance [@gally_entre_2018], et qu'il 
+que ce programme est un moyen de poursuivre un agenda plus ancien qui relève du 
+gouvernement à distance [@gally_entre_2018], et qu'il 
 réforme les hiérarchies scientifiques et crée de nouvelles inégalités [@aust_se_2018].
 Ces transformations s'inscrivent dans une politique de mise en compétition pour 
 bâtir des « empires universitaires » [@musselin_grande_2017]
@@ -126,10 +125,10 @@ des établissements qui en bénéficient ?
 
 # Méthodes et données.
 
-Cette question sera abordée sous l'angle des données ouvertes, qui permettent de 
+La question sera abordée sous l'angle des données ouvertes, qui permettent de 
 visualiser la distribution des moyens entre les établissements de l'ESR. 
-L'interprétation des données ouvertes nécessite de nombreuses prudences, 
-qui seront explicitées. Notamment, ces données sont aussi puissantes pour 
+Leur interprétation nécessite de nombreuses prudences, qui seront explicitées. 
+Notamment, ces données sont aussi puissantes pour 
 décrire qu'impuissantes pour expliquer. C'est pourquoi, nous proposons de _voir_
 et non d'expliquer.
 
@@ -139,7 +138,7 @@ avec ggplot [@wickham_ggplot2_2009], en respectant les principes fondamentaux
 RMarkdown [@xie_r_2019].
 
 
-Nous allons croiser quatre jeux de données ouvertes :
+Pour cette étude, nous allons croiser quatre jeux de données ouvertes :
 
 - `Indicateurs financiers des opérateurs de l’enseignement supérieur français`
 ^[https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-operateurs-indicateurs-financiers/information/] 
@@ -169,10 +168,11 @@ de leur labellisation d'Excellence.
 
 En s'intéressant à la distribution du PIA, on constate sans surprise de très grandes
 disparités, avec une claire domination des universités labellisées IDEx puis ISITE
-(Figure 2). Cependant, ce constat est relativisé lorsqu'on s'intéresse également
-aux autres financement (autres ressources propres `Autres RP` et subventions pour charge
-de service public `SCSP`), et au total appelé produit de fonctionnement encaissable 
-`PFE`, en face desquels le PIA semble moins important (Figure 3). 
+(Figure 2, les noms des établissements sont masqués pour des raisons qui seront développées). 
+Cependant, ce constat est relativisé lorsqu'on s'intéresse également
+aux autres financements : autres ressources propres (`Autres RP`) et subventions pour charge
+de service public (`SCSP`) ; ainsi qu'au total appelé produit de fonctionnement encaissable 
+(`PFE`), en face desquels le PIA semble le moins important (Figure 3). 
 
 De plus, les labellisations d'excellence étant fortement liées à des projets de
 fusion, il convient de neutraliser la taille des établissements, qui joue 
@@ -201,7 +201,7 @@ les causes et ressorts de ces transformations.
 Cette proposition s'inscrit dans l'Axe 3 : _Gouverner les inégalités : instruments et dispositifs_.
 
 
-```{r vue.pia, fig.cap = "Répartition des montants du PIA entre les universités"}
+```{r vue.pia, fig.cap = "Répartition des montants du PIA entre les universités", fig.height=2.5}
 anr.pivot.2 %>% 
   filter(!etablissement %in% etab.filter) %>%
   filter(exercice == exercice.ref) %>%
@@ -213,11 +213,11 @@ anr.pivot.2 %>%
   geom_col() +
   facet_grid(Indicateur~.) +
   ylab("Montant (M€)") + xlab("Universités") +
-  scale_fill_manual(values=étiquettes.pal) +
+  scale_fill_manual(values=étiquettes.pal, name="Labellisation") +
   theme_cpesr_cap() + theme(axis.text.x = element_blank())
 ```
 
-```{r vue.fin, fig.cap = "Répartition des moyens entre les universités"}
+```{r vue.fin, fig.cap = "Répartition des moyens entre les universités", fig.height=4}
 anr.pivot.2 %>% 
   filter(!etablissement %in% etab.filter) %>%
   filter(exercice == exercice.ref) %>%
@@ -228,11 +228,11 @@ anr.pivot.2 %>%
   geom_col() +
   facet_grid(Indicateur~.) +
   ylab("Montant (M€)") + xlab("Universités") +
-  scale_fill_manual(values=étiquettes.pal) +
+  scale_fill_manual(values=étiquettes.pal, name="Labellisation") +
   theme_cpesr_cap() + theme(axis.text.x = element_blank())
 ```
 
-```{r vue.pfe.tit, fig.cap = "Répartition des Produits de fonctionnement encaissables entre les universités, par E-EC titulaire"}
+```{r vue.pfe.tit, fig.cap = "Répartition des Produits de fonctionnement encaissables entre les universités, par E-EC titulaire", fig.height=2.5}
 anr.pivot.2 %>% 
   filter(!etablissement %in% etab.filter) %>%
   filter(exercice == exercice.ref) %>%
@@ -244,12 +244,12 @@ anr.pivot.2 %>%
   ggplot(aes(x=reorder(etablissement,-Valeur),y=Valeur,fill=étiquettes)) +
   geom_col() +
   facet_grid(Indicateur~.) +
-  ylab("Montant par E-EC titulaire (k€)") + xlab("Universités") +
-  scale_fill_manual(values=étiquettes.pal) +
+  ylab("Montant par\nE-EC titulaire (k€)") + xlab("Universités") +
+  scale_fill_manual(values=étiquettes.pal, name="Labellisation") +
   theme_cpesr_cap() + theme(axis.text.x = element_blank())
 ```
 
-```{r scsp.vs.PIA, fig.cap="Evolution des subventions pour charge de service public (SCSP) entre 2013 et 2019 selon les montants de PIA et les labellisations IDEx et ISITE"}
+```{r scsp.vs.PIA, fig.cap="Evolution des subventions pour charge de service public (SCSP) entre 2013 et 2019 selon les montants de PIA et les labellisations IDEx et ISITE", fig.height=4.5}
 df <- anr %>% 
   filter(!etablissement %in% etab.filter) %>%
   filter(!etablissement %in% c("Université de Versailles Saint-Quentin-en-Yvelines","Université d'Artois")) %>%
@@ -273,7 +273,7 @@ cowplot::plot_grid(ncol=2, rel_widths = c(2.5,1), align = "h", axis = "tb",
     ggrepel::geom_text_repel(aes(label=sigle)) +
     #ylim(-1e4,4e4) +
     xlab("ANR PIA en 2019 (M€)") + ylab("Evolution des SCSP entre 2013 et 2019 (M€)") +
-    scale_color_manual(values=étiquettes.pal) +
+    scale_color_manual(values=étiquettes.pal, name="Labellisation") +
     theme_cpesr_cap() +
     theme(
       panel.grid.major.x = element_line(color="grey",size=0.2)
@@ -285,13 +285,13 @@ cowplot::plot_grid(ncol=2, rel_widths = c(2.5,1), align = "h", axis = "tb",
     ggbeeswarm::geom_beeswarm() +
     #ylim(-1e4,4e4) +
     xlab("Etablissements") + ylab("") +
-    scale_color_manual(values=étiquettes.pal) +
+    scale_color_manual(values=étiquettes.pal, name="Labellisation") +
     theme_cpesr(base_family = "") + guides(color=FALSE)
 )
 ```
 
 
-```{r tit.vs.PIA, fig.cap="Evolution du nombre d'E-EC titulaires entre 2013 et 2019 selon les montants de PIA et les labellisations IDEx et ISITE"}
+```{r tit.vs.PIA, fig.cap="Evolution du nombre d'E-EC titulaires entre 2013 et 2019 selon les montants de PIA et les labellisations IDEx et ISITE", fig.height=4.5}
 df <- anr %>% 
   filter(!etablissement %in% etab.filter) %>%
   filter(!etablissement %in% c("Université de Versailles Saint-Quentin-en-Yvelines","Université d'Artois")) %>%
@@ -313,7 +313,7 @@ cowplot::plot_grid(ncol=2, rel_widths = c(2.5,1), align = "h", axis = "tb",
     ggrepel::geom_text_repel(aes(label=sigle)) +
     #ylim(-1e4,4e4) +
     xlab("ANR PIA en 2019 (M€)") + ylab("Evolution des effectifs E-EC titulaires\nentre 2013 et 2019") +
-    scale_color_manual(values=étiquettes.pal) +
+    scale_color_manual(values=étiquettes.pal, name="Labellisation") +
     theme_cpesr_cap() +
     theme(
       panel.grid.major.x = element_line(color="grey",size=0.2)
@@ -326,10 +326,13 @@ cowplot::plot_grid(ncol=2, rel_widths = c(2.5,1), align = "h", axis = "tb",
     #geom_boxplot() +
     #ylim(-1e4,4e4) +
     xlab("Etablissements") + ylab("") +
-    scale_color_manual(values=étiquettes.pal) +
+    scale_color_manual(values=étiquettes.pal, name="Labellisation") +
     theme_cpesr(base_family = "") + guides(color=FALSE)
 )
 ```
+
+
+
 \newpage 
 
 # Références
