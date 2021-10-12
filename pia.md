@@ -15,6 +15,8 @@ Untitled
 
 ![](pia_files/figure-gfm/check-1.png)<!-- -->
 
+## Vues
+
 ![](pia_files/figure-gfm/total.pia-1.png)<!-- -->
 
 ![](pia_files/figure-gfm/pia-1.png)<!-- -->
@@ -26,8 +28,6 @@ Untitled
 ![](pia_files/figure-gfm/tab.ind.norm-1.png)<!-- -->
 
 ![](pia_files/figure-gfm/pia.vs.scsp.norm-1.png)<!-- -->
-
-![](pia_files/figure-gfm/pia.vs.scsp.norm.bp-1.png)<!-- -->
 
 ## Vues rapides
 
@@ -42,3 +42,7 @@ Untitled
 ![](pia_files/figure-gfm/vue.pfe.etu-1.png)<!-- -->
 
 ![](pia_files/figure-gfm/vue.pfe.norm-1.png)<!-- -->
+
+![](pia_files/figure-gfm/SCSP-1.png)<!-- -->
+
+![](pia_files/figure-gfm/SCSP.evol-1.png)<!-- -->

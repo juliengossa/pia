@@ -1,15 +1,18 @@
 ---
 title: "Avez-vous déjà vu... La distribution du PIA ?"
-subtitle: Le PIA, des moyens en plus ou un moyen de plus ?
 author:
 - GOSSA, Julien
 - Maître de conférences
 - Université de Strasbourg, Laboratoires SAGE UMR 7363 et ICube UMR 7357
 - MISHA - 5 allée du Général Rouvillois, 67083 Strasbourg Cedex
 - gossa@unistra.fr
+subtitle: Le PIA, des moyens en plus ou un moyen de plus ?
 output:
   pdf_document:
     number_sections: yes
+    keep_tex: yes
+  html_document:
+    df_print: paged
   word_document: default
 header-includes: \renewcommand{\and}{\\}
 bibliography: pia.bib
