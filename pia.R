@@ -40,10 +40,10 @@ fin <- read.csv("fr-esr-operateurs-indicateurs-financiers.csv",sep=";",quote='"'
 
 etiquettes <- read.csv("etiquettes.csv") %>%
   mutate(étiquettes = factor(case_when(
-    IDEx ~ "IDEx",
-    ISITE ~ "ISITE",
-    TRUE ~ "NINI"),
-    levels=c("IDEx","ISITE","NINI","Non Université"))
+    IDEx ~ "Univ. IDEx",
+    ISITE ~ "Univ. ISITE",
+    TRUE ~ "Univ. NINI"),
+    levels=c("Univ. IDEx","Univ. ISITE","Univ. NINI","Non Université"))
   ) 
 
 
@@ -58,7 +58,7 @@ anr <- fin %>%
     RP = Ressources.propres.encaissables,
     SCSP = Produits.de.fonctionnement.encaissables - Ressources.propres.encaissables,
     PFE = Produits.de.fonctionnement.encaissables,
-    RPF = Droits.d.inscription + Taxe.d.apprentissage
+    RPF = Droits.d.inscription + Taxe.d.apprentissage + Formation.continue..diplômes.propres.et.VAE
   ) %>%
   ungroup() %>%
   #left_join(ens) %>%
@@ -87,9 +87,9 @@ anr <- fin %>%
   #mutate(groupe = as.factor(ifelse(etablissement == "Université Paris-Dauphine", "université", as.character(groupe)))) %>%
   mutate(étiquettes = factor(case_when(
     groupe != "université" ~ "Non université",
-    is.na(étiquettes) ~ "NINI",
+    is.na(étiquettes) ~ "Univ. NINI",
     TRUE ~ as.character(étiquettes)),
-    levels=c("IDEx","ISITE","NINI","Non université")))
+    levels=c("Univ. IDEx","Univ. ISITE","Univ. NINI","Non université")))
 
 
 

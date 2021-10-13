@@ -5,7 +5,7 @@ author:
 - Maître de conférences\newline
 - Université de Strasbourg, Laboratoires SAGE UMR 7363 et ICube UMR 7357\newline
 - gossa@unistra.fr
-subtitle: Le PIA, des moyens en plus ou un moyen de plus ?
+subtitle: IDEX/ISITE, des moyens en plus ou un moyen de plus ?
 output:
   beamer_presentation:
     slide_level: 2
@@ -39,7 +39,7 @@ source("pia-plot.R")
 
 :::::: {.cols data-latex=""}
 
-::: {.col data-latex="{0.65\textwidth}"}
+::: {.col data-latex="{0.7\textwidth}"}
 
 - Opéré pour l'ESR par l'Agence Nationale de la Recherche (ANR)
   - 22,5 Md€ sur les 35 du PIA 1 (2010)
@@ -51,9 +51,12 @@ source("pia-plot.R")
 
 - Différents projets « transformants »
   - par exemple : Ecoles universitaires de recherche (EUR)
-  - mais surtout : 
+  - mais surtout : IDEX / ISITE
     - Initiatives d'Excellence (IDEx) 
     - Initiatives – Science - Innovation - Territoires - Economie (ISITE)
+    - « 10 pôles pluridisciplinaires d’excellence de rang mondial »
+    - Très liés aux fusions
+    - IGAENR : peu d'avantages en termes d'enseignement ou de recherche [@philippe_bezagu_premier_2019]
 :::
 
 ::: {.col data-latex="{0.05\textwidth}"}
@@ -62,7 +65,7 @@ source("pia-plot.R")
 a column separator -->
 :::
 
-::: {.col data-latex="{0.3\textwidth}"}
+::: {.col data-latex="{0.25\textwidth}"}
 ![](logo_investirlavenir_cmjn_web_0.png)
 :::
 
@@ -76,6 +79,7 @@ vilaine paresse qu’est l’acceptation du déclin___ » [@alain_juppe_investir
   - Comité d'examen à mi-parcours [@philippe_maystadt_programme_2016]
   - Comité de surveillance des investissements d’avenir [@patricia_barbizet_evaluation_2019] 
   - Cour des comptes [@cour_des_comptes_2018a; -@cour_des_comptes_2018a]
+    - Aucun ne peut conclure en une réelle efficacité du PIA
 
 
 - 2019 : Rapports des groupes de travail pour la Loi de programmation de la recherche
@@ -94,20 +98,15 @@ avec les idex et les isite___ » [@julien_jankowiak_alain_2021].
 
 ## Evolutions (caricaturées) du financement des universités
 
-- Lien PIA - restructurations (notamment les fusions)
-  - IGAENR : peu d'avantages en termes d'enseignement ou de recherche [@philippe_bezagu_premier_2019]
-  - Nécessite beaucoup de moyens
-
-\ 
-
-- Contexte : réforme de la distribution des SCSP (Subventions pour Charge de Service Public)
+- Contexte : réforme de la distribution des SCSP (Subventions pour Charge de Service Public) [@pacale_aime_etude_2012] 
   - 1994 - 2005 : SanREMO (Système analytique de Répartition des Moyens)
-  - 2007 : LRU et RCE (Responsabilités et compétences élargies) [@pacale_aime_etude_2012] 
+  - 2007 : LRU et RCE (Responsabilités et compétences élargies) 
   - 2009 : SYMPA (SYstème de répartition des Moyens à l'Activité et à la Performance) 
   - SYMPA 2
   - Dialogue de gestion
   - Dialogue « stratégique » et de gestion [@julien_gossa_quel_2019].
 
+\ 
 
 ### IDEX et ISITE = Ressources additionnelles + Labellisation des établissements ?
 - Des moyens en plus, ou un moyen de plus de différencier les établissements ?
@@ -273,7 +272,7 @@ rpf.univ.diff.sort
   - Répartition des moyens entre les établissements
   - Répartition des IDEX au sein des établissements
 
-### La chose à retenir 
+### Deux choses à retenir 
 - Les IDEX/ISITE sont beaucoup plus des labels que des moyens supplémentaires
 - Différenciation interne sans doute beaucoup plus qu'externe
 

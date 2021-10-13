@@ -205,7 +205,7 @@ Cette proposition s'inscrit dans l'Axe 3 : _Gouverner les inégalités : instrum
 
 
 ```{r vue.pia, fig.cap = "Répartition des montants du PIA entre les universités", fig.height=2.5}
-anr.pivot.2 %>% 
+anr.pivot %>% 
   filter(!etablissement %in% etab.filter) %>%
   filter(exercice == exercice.ref) %>%
   filter(groupe == "université") %>% 
@@ -221,7 +221,7 @@ anr.pivot.2 %>%
 ```
 
 ```{r vue.fin, fig.cap = "Répartition des moyens entre les universités", fig.height=4}
-anr.pivot.2 %>% 
+anr.pivot %>% 
   filter(!etablissement %in% etab.filter) %>%
   filter(exercice == exercice.ref) %>%
   filter(groupe == "université") %>% 
@@ -236,7 +236,7 @@ anr.pivot.2 %>%
 ```
 
 ```{r vue.pfe.tit, fig.cap = "Répartition des Produits de fonctionnement encaissables entre les universités, par E-EC titulaire", fig.height=2.5}
-anr.pivot.2 %>% 
+anr.pivot %>% 
   filter(!etablissement %in% etab.filter) %>%
   filter(exercice == exercice.ref) %>%
   filter(groupe == "université") %>% 

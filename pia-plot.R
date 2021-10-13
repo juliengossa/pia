@@ -28,6 +28,7 @@ pia.total
 pia.univ <- anr.pivot %>% 
   mutate(Valeur = Valeur / 1e6) %>%
   filter(Indicateur == "ANR PIA") %>%
+  filter(!is.na(Valeur)) %>%
   
   ggplot(aes(x=reorder(etab_label,-Valeur),y=Valeur,fill=étiquettes)) +
   geom_col() +
