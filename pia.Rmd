@@ -1,14 +1,144 @@
 ---
-title: "Untitled"
+title: "DataESR : Etude de la distribution du PIA parmi les établissements de l'ESR"
 output: github_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
-source("pia.R")
 exercice.ref <- 2019
+source("pia-plot.R")
+
+theme_cpesr_setup(source="https://github.com/juliengossa/pia")
+theme_set(theme_cpesr() + theme(legend.position="right"))
+
+knitr::opts_chunk$set(fig.width=8, fig.height =4.5, fig.retina = TRUE)
 ```
 
+## Figures principales
+
+
+## Evolution du PIA sur tout le jeu de données
+
+`Indicateurs financiers des opérateurs de l’enseignement supérieur français`
+^[https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-operateurs-indicateurs-financiers/information/] 
+
+
+```{r total.pia, fig.height=3}
+pia.total + cpesr_cap()
+```
+
+## Universités (2019) > PIA 
+
+```{r vue.pia, fig.height=3.5}
+pia.univ + cpesr_cap()
+```
+
+## Universités (2019) > Toutes les ressources
+
+- ressources propres (`RP`)
+- subventions pour charge de service public (`SCSP`)
+- produit de fonctionnement encaissable (`PFE`)
+
+
+```{r all.univ, fig.height=3}
+all.univ + cpesr_cap()
+```
+
+# Produits de fonctionnement encaissables (PFE)
+
+## Universités (2019) > PFE
+
+```{r pfe.univ}
+pfe.univ + cpesr_cap()
+```
+
+## Universités (2019) > PFE 
+
+```{r pfe.univ.sort}
+pfe.univ.sort + cpesr_cap()
+```
+
+## Universités (2019) > PFE > Taille d'établissement
+
+```{r pfe.univ.etu.ens}
+pfe.univ.etu.ens + cpesr_cap()
+```
+
+
+## Universités (2019) > PFE > par étudiant
+
+```{r pfe.univ.size}
+pfe.univ.size + cpesr_cap()
+```
+
+## Universités (2019) > PFE > par étudiant
+
+```{r pfe.univ.size.sort}
+pfe.univ.size.sort + cpesr_cap()
+```
+
+## Universités (2019) > PFE > par titulaire
+
+```{r pfe.univ.size.tit.sort}
+pfe.univ.size.tit.sort + cpesr_cap()
+```
+
+
+# Subventions pour charges de service public (SCSP)
+
+## Universités (2019) > SCSP
+
+```{r scsp.univ}
+scsp.univ + cpesr_cap()
+```
+
+
+## Universités (2019) > SCSP > par titulaire
+
+```{r scsp.univ.size.tit.sort}
+scsp.univ.size.tit.sort + cpesr_cap()
+```
+
+## Universités (2019) > SCSP > par étudiant
+
+```{r scsp.univ.size.etu.sort}
+scsp.univ.size.etu.sort + cpesr_cap()
+```
+
+
+## Universités (2019) > SCSP > par étudiant > Evolution
+
+```{r scsp.univ.evol}
+scsp.univ.evol + cpesr_cap()
+```
+
+## Universités (2019) > SCSP > par étudiant > Evolution (depuis 2013)
+
+```{r scsp.univ.evol.sort}
+scsp.univ.evol.sort + cpesr_cap()
+```
+
+
+# Labelisation d'une politique ?
+
+## Universités (2019) > Titulaires > Evolution (depuis 2010)
+
+```{r tit.univ.diff.sort}
+tit.univ.diff.sort + cpesr_cap()
+```
+
+## Universités (2019) > Taux d'encadrement > Evolution (depuis 2013)
+
+```{r tde.univ.diff.sort}
+tde.univ.diff.sort + cpesr_cap()
+```
+
+
+## Universités (2019) > RP formation > Evolution (depuis 2013)
+
+```{r rpf.univ.diff.sort}
+rpf.univ.diff.sort + cpesr_cap()
+```
 
 ## check
 
@@ -16,11 +146,11 @@ exercice.ref <- 2019
 
 ```{r check.idex, fig.width=10, fig.height=12}
 etiquettes %>%
-  filter(étiquettes == "IDEx") %>%
-  select(UAI,étiquettes,Libellé) %>%
-  left_join(anr) %>%
+  filter(étiquettes == "Univ. IDEx") %>%
+  select(UAI,étiquettes,Libellé) %>% 
+  left_join(anr) %>% 
   pivot_longer(c(SCSP:PFE,titulaires,étudiants), names_to = "Indicateur", values_to = "Valeur") %>%
-  mutate(Indicateur = factor(Indicateur,levels=c("ANR.PIA","ANR.hors.PIA","Autres.RP","SCSP","PFE","titulaires","étudiants"))) %>%
+  mutate(Indicateur = factor(Indicateur,levels=c("ANR.PIA","ANR.hors.PIA","Autres.RP","SCSP","PFE","titulaires","étudiants"))) %>% 
   mutate(Check = !is.na(Valeur)) %>% 
   ggplot(aes(x=exercice,y=Indicateur,color=Check)) + 
   geom_point(size=3) +
@@ -32,7 +162,7 @@ etiquettes %>%
 
 ```{r check, fig.width=10, fig.height=10}
 etiquettes %>%
-  filter(étiquettes == "ISITE") %>%
+  filter(étiquettes == "Univ. ISITE") %>%
   select(UAI,étiquettes,Libellé) %>%
   left_join(anr) %>%
   pivot_longer(c(SCSP:PFE,titulaires,étudiants), names_to = "Indicateur", values_to = "Valeur") %>%
@@ -46,14 +176,6 @@ etiquettes %>%
 
 ## Vues
 
-```{r total.pia}
-anr %>%
-  group_by(exercice) %>%
-  summarise(ANR.PIA = sum(ANR.PIA, na.rm = TRUE) / 1e6) %>%
-  ggplot(aes(x=exercice,y=ANR.PIA)) +
-  geom_col() +
-  theme_cpesr_cap()
-```
 
 
 ```{r pia, fig.width=8, fig.height=16}
@@ -75,25 +197,6 @@ anr %>%
 ```
 
 
-
-```{r tab.ind, fig.width=10, fig.height=16}
-anr.pivot %>% 
-  filter(exercice == exercice.ref) %>%
-  filter(groupe == "université") %>% 
-  mutate(Valeur = round(Valeur / 1e6,0)) %>%
-  
-  ggplot(aes(x=reorder(etablissement,-rang),y=Valeur,fill=étiquettes)) +
-  geom_col() +
-  geom_text(aes(y=max(Valeur)/1.3, label=paste(Valeur,"M€")), hjust=1 ) +
-  coord_flip() +
-  facet_grid(.~Indicateur) +
-  xlab("Montant (M€)") + ylab("") +
-  theme_cpesr_cap() +
-  theme(
-    panel.grid.major.x = element_line(color="grey",size=0.2),
-    panel.grid.major.y = element_blank()
-  )
-```
 
 
 
@@ -118,25 +221,6 @@ anr %>%
 
 
 
-```{r tab.ind.norm, fig.width=10, fig.height=16}
-anr.pivot %>% 
-  filter(exercice == exercice.ref) %>%
-  filter(groupe == "université") %>% 
-  mutate(Valeur = Valeur/titulaires) %>%  
-  mutate(Valeur = round(Valeur / 1e3,0)) %>%
-  
-  ggplot(aes(x=reorder(etablissement,-rang),y=Valeur,fill=étiquettes)) +
-  geom_col() +
-  geom_text(aes(y=max(Valeur)/1.3, label=paste(Valeur,"k€")), hjust=1 ) +
-  coord_flip() +
-  facet_grid(.~Indicateur) +
-  xlab("Montant par E-EC titulaire (M€)") + ylab("") +
-  theme_cpesr_cap() +
-  theme(
-    panel.grid.major.x = element_line(color="grey",size=0.2),
-    panel.grid.major.y = element_blank()
-  )
-```
 
 
 
@@ -166,77 +250,8 @@ anr %>%
 ## Vues rapides
 
 
-```{r vue.pia}
-anr.pivot %>% 
-  filter(exercice == exercice.ref) %>%
-  filter(groupe == "université") %>% 
-  mutate(Valeur = Valeur / 1e6,0) %>%
-  filter(Indicateur == "ANR PIA") %>%
-  
-  ggplot(aes(x=reorder(etablissement,rang),y=Valeur,fill=étiquettes)) +
-  geom_col() +
-  facet_grid(Indicateur~.) +
-  ylab("Montant (M€)") + xlab("Universités") +
-  theme_cpesr_cap() + theme(axis.text.x = element_blank())
-```
-
-```{r vue.tout, fig.width=8, fig.height=6}
-anr.pivot.2 %>% 
-  filter(exercice == exercice.ref) %>%
-  filter(groupe == "université") %>% 
-  mutate(Valeur = round(Valeur / 1e6,0)) %>%
-  
-  ggplot(aes(x=reorder(etablissement,rang),y=Valeur,fill=étiquettes)) +
-  geom_col() +
-  facet_grid(Indicateur~.) +
-  ylab("Montant (M€)") + xlab("Universités") +
-  theme_cpesr_cap() + theme(axis.text.x = element_blank())
-
-```
-
-```{r vue.tout.norm, fig.width=8, fig.height=6}
-anr.pivot.2 %>% 
-  filter(exercice == exercice.ref) %>%
-  filter(groupe == "université") %>% 
-  mutate(Valeur = round(Valeur/titulaires / 1e3,0)) %>%
-  
-  ggplot(aes(x=reorder(etablissement,rang),y=Valeur,fill=étiquettes)) +
-  geom_col() +
-  facet_grid(Indicateur~.) +
-  ylab("Montant par E-EC titulaire (k€)") + xlab("Universités") +
-  theme_cpesr_cap() + theme(axis.text.x = element_blank())
-```
 
 
-```{r vue.pfe.tit}
-anr.pivot %>% 
-  filter(exercice == exercice.ref) %>%
-  filter(groupe == "université") %>% 
-  mutate(Valeur = round(Valeur/titulaires / 1e3,0)) %>%
-  filter(Indicateur == "PFE") %>%
-  
-  ggplot(aes(x=reorder(etablissement,-Valeur),y=Valeur,fill=étiquettes)) +
-  geom_col() +
-  facet_grid(Indicateur~.) +
-  ylab("Montant par E-EC titulaire (k€)") + xlab("Universités") +
-  theme_cpesr_cap() + theme(axis.text.x = element_blank())
-```
-
-
-
-```{r vue.pfe.etu}
-anr.pivot %>% 
-  filter(exercice == exercice.ref) %>%
-  filter(groupe == "université") %>% 
-  mutate(Valeur = Valeur/étudiants / 1e3) %>%
-  filter(Indicateur == "SCSP") %>%
-  
-  ggplot(aes(x=reorder(etablissement,-Valeur),y=Valeur,fill=étiquettes)) +
-  geom_col() +
-  facet_grid(Indicateur~.) +
-  ylab("Montant par étudiant (k€)") + xlab("Universités") +
-  theme_cpesr_cap() + theme(axis.text.x = element_blank())
-```
 
 
 ```{r vue.pfe.norm}
@@ -282,31 +297,4 @@ anr %>%
   theme_cpesr()
 ```
 
-```{r SCSP.evol}
-anr %>%
-  filter(as.character(exercice) > "2013") %>%
-  filter(groupe == "université") %>%
-  group_by(UAI) %>%
-  arrange(exercice) %>%
-  mutate(SCSP.diff = SCSP / first(SCSP) *100) %>%
-  ggplot(aes(x=exercice,y=SCSP.diff,color=étiquettes)) +
-  geom_boxplot() +
-  theme_cpesr()
-```
 
-
-```{r SCSP.evol.sd}
-anr %>%
-  filter(as.character(exercice) > "2013") %>%
-  filter(groupe == "université") %>%
-  filter(étudiants != 0) %>%
-  pivot_longer(c(SCSP,ANR.PIA,ANR.hors.PIA,Autres.RP,PFE), names_to = "Indicateur", values_to = "Valeur") %>%
-  mutate(Valeur = Valeur / étudiants) %>% 
-  group_by(exercice,Indicateur) %>%
-  summarise(EcartType = sd(Valeur, na.rm = TRUE)) %>%
-  group_by(Indicateur) %>%
-  mutate(EcartType = EcartType / first(EcartType) * 100) %>%
-  ggplot(aes(x=exercice,y=EcartType,color=Indicateur)) +
-  geom_line(aes(group=Indicateur)) +
-  theme_cpesr()
-```

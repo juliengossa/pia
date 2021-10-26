@@ -1,11 +1,11 @@
 ---
-title: "The french excellence initiative in figures"
+title: "The french excellence initiative"
 author:
 - Julien Gossa\newline
 - Maître de conférences\newline
 - Université de Strasbourg, Laboratoires SAGE UMR 7363 et ICube UMR 7357\newline
 - gossa@unistra.fr
-subtitle: More money, or different money?
+subtitle: "Making the happy few?"
 output:
   beamer_presentation:
     slide_level: 2
@@ -39,9 +39,9 @@ source("pia-plot.R")
 
 :::::: {.cols data-latex=""}
 
-::: {.col data-latex="{0.65\textwidth}"}
+::: {.col data-latex="{0.60\textwidth}"}
 
-- Distributed by the _Agence Nationale de la Recherche_ (ANR)
+- Managed by the _Agence Nationale de la Recherche_ (ANR)
   - 22,5 B€ (over 35) for PIA 1 (2010)
   - 4,5 B€ (over 12) for PIA 2 (2014) 
   - 2,85 B€ (over 10) for PIA 3 (2017) 
@@ -50,20 +50,24 @@ source("pia-plot.R")
 \  
 
 - For universities: « Transforming » projects
-  - for instance: _Ecoles universitaires de recherche_ (EUR = ITI)
-  - but especially : 
-    - Initiatives d'Excellence (IDEx) 
-    - Initiatives – Science - Innovation - Territoires - Economie (ISITE)
+  - Initiatives d'Excellence (IDEx) 
+  - Initiatives – Science - Innovation - Territoires - Economie (ISITE)
+  - Similiar to german _Exzellenzinitiative Zukunftskonzepte_ (Future concepts)
+  - « 10 world-class comprehensive universities of excellence »
+  - Closely linked to mergers
+  - IGAENR: little benefit in terms of teaching or research [@philippe_bezagu_premier_2019]
+    
+    
 :::
 
-::: {.col data-latex="{0.05\textwidth}"}
+::: {.col data-latex="{0.01\textwidth}"}
 \ 
 <!-- an empty Div (with a white space), serving as
 a column separator -->
 :::
 
-::: {.col data-latex="{0.3\textwidth}"}
-![](logo_investirlavenir_cmjn_web_0.png)
+::: {.col data-latex="{0.4\textwidth}"}
+![](eau-mergers.png)
 :::
 
 ::::
@@ -84,29 +88,24 @@ ugly laziness that is the acceptance of decline___ » [@alain_juppe_investir_200
 
 \ 
 
-- 2021 : Interview AEF Juppé : « ___We have been able to avoid sprinkling. [...] 
+### 2021 : Interview Juppé(AEF)
+« ___We have been able to avoid sprinkling. [...] 
 We have diversified the products, if I may say so, with idex and isites___ » [@julien_jankowiak_alain_2021]. 
 
-### More scientifically
-- Remote government [@gally_entre_2018]
-- Reform of scientific hierarchies and creation of new inequalities [@aust_se_2018]
-- Competition policy to build "university empires" [@musselin_grande_2017]
+<!-- ### More scientifically -->
+<!-- - Remote government [@gally_entre_2018] -->
+<!-- - Reform of scientific hierarchies and creation of new inequalities [@aust_se_2018] -->
+<!-- - Competition policy to build "university empires" [@musselin_grande_2017] -->
 
-## (Caricatured) developments in university funding
+<!-- ## (Caricatured) developments in university funding -->
 
-- Link between PIA and mergers
-  - IGAENR: little benefit in terms of teaching or research [@philippe_bezagu_premier_2019]
-  - Very expensive
-
-\ 
-
-- Context : reform of the distribution of SCSPs (Subventions pour Charge de Service Public)
-  - 1994 - 2005 : SanREMO (_Système analytique de Répartition des Moyens_)
-  - 2007 : LRU et RCE (_Responsabilités et compétences élargies_ payroll) [@pacale_aime_etude_2012] 
-  - 2009 : SYMPA (_SYstème de répartition des Moyens à l'Activité et à la Performance_) 
-  - SYMPA 2
-  - _Dialogue de gestion_
-  - _Dialogue « stratégique » et de gestion_ [@julien_gossa_quel_2019].
+<!-- - Context : reform of the distribution of SCSPs (Subsidies for Public Service Charge) -->
+<!--   - 1994 - 2005 : SanREMO (_Système analytique de Répartition des Moyens_) -->
+<!--   - 2007 : LRU et RCE (_Responsabilités et compétences élargies_ payroll) [@pacale_aime_etude_2012]  -->
+<!--   - 2009 : SYMPA (_SYstème de répartition des Moyens à l'Activité et à la Performance_)  -->
+<!--   - SYMPA 2 -->
+<!--   - _Dialogue de gestion_ -->
+<!--   - _Dialogue « stratégique » et de gestion_ [@julien_gossa_quel_2019]. -->
 
 
 ### IDEX and ISITE = Money + Label ?

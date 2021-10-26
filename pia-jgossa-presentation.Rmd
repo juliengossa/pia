@@ -35,7 +35,7 @@ source("pia-plot.R")
 
 # Introduction
 
-## PIA : Programme d’investissements d’avenir
+## PIA : Programme d’investissements d’avenir, IDEX/ISITE
 
 :::::: {.cols data-latex=""}
 
@@ -262,7 +262,7 @@ rpf.univ.diff.sort
 
 ### IDEX et ISITE = Ressources additionnelles + Labellisation des établissements ?
 - ~~Des moyens en plus~~
-- __Un moyen de plus de différencier les établissements__
+- __Un moyen de plus de différencier ~~les établissements~~ (?)__
   - Pas très visible de l'extérieur (dès lors qu'on neutralise la taille)
 
 ### Nécessaire prudence
